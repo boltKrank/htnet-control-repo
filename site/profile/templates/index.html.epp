@@ -1,0 +1,4 @@
+This machine is <%=$::fqdn %>
+<br> <br>
+The IP is <%= $::ipaddress %>
+
