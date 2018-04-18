@@ -4,6 +4,10 @@ class profile::apache_webserver {
   include apache
 
   file {'/var/www':
+    ensure => directory,
+  }
+
+  file {'/var/www':
     ensure  => file,
     content => epp('profile/index.html.epp'),
   }
