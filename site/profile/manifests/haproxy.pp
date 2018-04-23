@@ -2,23 +2,23 @@ class profile::haproxy {
 
   include ::haproxy
 
-  haproxy::listen { 'puppet00':
+  haproxy::listen { 'loadbalancer':
     collect_exported => false,
     ipaddress        => $::ipaddress,
-    ports            => '8140',
+    ports            => '80',
   }
-  haproxy::balancermember { 'master00':
-    listening_service => 'puppet00',
-    server_names      => 'master00.example.com',
-    ipaddresses       => '10.0.0.10',
-    ports             => '8140',
+  haproxy::balancermember { 'web1':
+    listening_service => 'loadbalancer',
+    server_names      => 'web1.localdomain',
+    #ipaddresses       => '10.0.0.10',
+    ports             => '80',
     options           => 'check',
   }
-  haproxy::balancermember { 'master01':
-    listening_service => 'puppet00',
-    server_names      => 'master01.example.com',
-    ipaddresses       => '10.0.0.11',
-    ports             => '8140',
+  haproxy::balancermember { 'web2':
+    listening_service => 'loadbalancer',
+    server_names      => 'web2.localdomain',
+    #ipaddresses       => '10.0.0.11',
+    ports             => '80',
     options           => 'check',
   }
 
