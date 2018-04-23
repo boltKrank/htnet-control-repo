@@ -4,6 +4,7 @@ class profile::haproxy {
 
   haproxy::listen { 'loadbalancer':
     collect_exported => false,
+    mode             => 'http',
     ipaddress        => $::ipaddress,
     ports            => '80',
   }
